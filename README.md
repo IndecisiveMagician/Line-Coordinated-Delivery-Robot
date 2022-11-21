@@ -10,6 +10,6 @@ A brief description of what this project does and who it's for
 - Chico General 
 - Mad Perry [@IndecisiveMagician](https://www.github.com/IndecisiveMagician)
 - Timothy Farr [@timtim20](https://www.github.com/timtim20)
-- Jaci Taylor 
+- Jaci Taylor [@jt1938](https://www.github.com/jt1938)
 
 
