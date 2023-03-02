@@ -1,0 +1,48 @@
+.top-btn-group button {
+    background-color: #80bdff;
+    /* Blue background */
+    border: 1px solid blue;
+    /* Blue border */
+    cursor: pointer;
+    /* Pointer/hand icon */
+}
+
+.btn-group button {
+    background-color: #80bdff;
+    /* Blue background */
+    border: 1px solid blue;
+    /* Blue border */
+    cursor: pointer;
+    /* Pointer/hand icon */
+    display: block;
+    /* Make the buttons appear below each other */
+    font-size: 25px;
+    height: 50px;
+    margin-bottom: 5px;
+    width: 100%;
+    /* Set a width if needed */
+}
+
+.bottom-btn-group button {
+    cursor: pointer;
+    /* Pointer/hand icon */
+    margin-right: 16px;
+    /*Set spacing on the right side between buttons*/
+}
+
+.bottom-btn {
+    background-color: #80bdff;
+    /* Blue background */
+    border: 1px solid blue;
+    /* Blue border */
+}
+
+.emergency-btn {
+
+    background-color: #ff0000;
+    /* Red background */
+    border: 1px solid red;
+    /* Red border */
+    color: #ffffff;
+    /* white text */
+}
