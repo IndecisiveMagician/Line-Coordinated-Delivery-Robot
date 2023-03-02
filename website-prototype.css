@@ -41,12 +41,65 @@
     /* Blue border */
 }
 
-.emergency-btn {
+.emer-button {
+    background: transparent;
+    border: 0px;
+    color: #e04e5e;
+    display: block;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    height: 80px;
+    line-height: 80px;
+    margin: 40px auto;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 300px;
+}
 
-    background-color: #ff0000;
-    /* Red background */
-    border: 1px solid red;
-    /* Red border */
-    color: #ffffff;
-    /* white text */
+.emer-button:before,
+.emer-button:after {
+    content: '';
+    height: 34px;
+    left: 0px;
+    position: absolute;
+    width: 300px;
+    z-index: -1;
+}
+
+.emer-button:before {
+    transform: perspective(15px) rotateX(3deg);
+}
+
+.emer-button:after {
+    top: 40px;
+    transform: perspective(15px) rotateX(-3deg);
+}
+
+/* Button Border Style */
+.emer-button.border:before,
+.emer-button.border:after {
+    border: 4px solid #e04e5e;
+}
+
+.emer-button.border:before {
+    border-bottom: none;
+    /* to prevent the border-line showing up in the middle of the shape */
+}
+
+.emer-button.border:after {
+    border-top: none;
+    /* to prevent the border-line showing up in the middle of the shape */
+}
+
+/* Button hover styles */
+
+.emer-button.border:hover:before,
+.emer-button.border:hover:after {
+    background: #e04e5e;
+}
+
+.emer-button.border:hover {
+    color: #fff;
 }
