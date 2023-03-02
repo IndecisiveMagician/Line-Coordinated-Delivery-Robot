@@ -30,6 +30,10 @@
     /*Set spacing on the right side between buttons*/
 }
 
+.circlebtn {
+    border-radius: 50%; /* circle button */
+}
+
 .bottom-btn {
     background-color: #80bdff;
     /* Blue background */
