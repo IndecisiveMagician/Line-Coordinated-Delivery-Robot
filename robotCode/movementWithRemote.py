@@ -21,8 +21,9 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pin, GPIO.IN)
 GPIO.setup(33, GPIO.IN) # Connected to Left IR Sensor
 GPIO.setup(35, GPIO.IN) # Connected to Right IR Sensor
+GPIO.setup(31, GPIO.IN) # Connected to Middle IR Sensor
 GPIO.setup(7, GPIO.OUT) # Connected to PWMA
-GPIO.setup(11, GPIO.OUT) # Connected to AIN2
+GPIO.setup(29, GPIO.OUT) # Connected to AIN2
 GPIO.setup(12, GPIO.OUT) # Connected to AIN1
 GPIO.setup(13, GPIO.OUT) # Connected to STBY
 GPIO.setup(15, GPIO.OUT) # Connected to BIN1
@@ -30,6 +31,9 @@ GPIO.setup(16, GPIO.OUT) # Connected to BIN2
 GPIO.setup(37, GPIO.OUT) # Connected to PWMB
 
 print("running!")
+roomCounter = 0
+roomNumber = 0
+        
 
 # Gets binary value
 
@@ -90,15 +94,35 @@ def convertHex(binaryValue):
 	tmpB2 = int(str(binaryValue),2) #Temporarely propper base 2
 	return hex(tmpB2)
 	
-def robot_move():
+def robot_move(roomNumber):
+	global roomCounter
+	global doBreak
 	i = 0
-	while (i < 45):
+	roomWait = 0
+	while (i < 600):
+		if GPIO.input(31):
+			roomWait = 0
+		if (not GPIO.input(33)) and (not GPIO.input(35)) and (not GPIO.input(31) and roomWait == 0):
+			# Reset all the GPIO pins by setting them to LOW
+			GPIO.output(12, GPIO.LOW) # Set AIN1
+			GPIO.output(29, GPIO.LOW) # Set AIN2
+			GPIO.output(7, GPIO.LOW) # Set PWMA
+			GPIO.output(13, GPIO.LOW) # Set STBY
+			GPIO.output(15, GPIO.LOW) # Set BIN1
+			GPIO.output(16, GPIO.LOW) # Set BIN2
+			GPIO.output(37, GPIO.LOW) # Set PWMB
+			roomCounter = roomCounter + 1
+			roomWait = 1
+			if roomNumber == roomCounter:
+				doBreak = 1
+				print("found the room!")
+				break
 		if GPIO.input(33):
 			  #turn left
 			  print("Robot is straying off to the right, move left captain!")
 			  # Motor A:
 			  GPIO.output(12, GPIO.LOW) # Set AIN1
-			  GPIO.output(11, GPIO.HIGH) # Set AIN2
+			  GPIO.output(29, GPIO.HIGH) # Set AIN2
 			  # Motor B:
 			  GPIO.output(15, GPIO.HIGH) # Set BIN1
 			  GPIO.output(16, GPIO.LOW) # Set BIN2
@@ -109,13 +133,13 @@ def robot_move():
 			  GPIO.output(37, GPIO.HIGH) # Set PWMB
 			  # Disable STBY (standby)
 			  GPIO.output(13, GPIO.HIGH)
-			  time.sleep(0.3)
+			  time.sleep(0.1)
 		elif GPIO.input(35):
 			  #turn right
 			  print("Robot is straying off to the left, move right captain!")
 			  # Motor A:
 			  GPIO.output(12, GPIO.HIGH) # Set AIN1
-			  GPIO.output(11, GPIO.LOW) # Set AIN2
+			  GPIO.output(29, GPIO.LOW) # Set AIN2
 			  # Motor B:
 			  GPIO.output(15, GPIO.LOW) # Set BIN1
 			  GPIO.output(16, GPIO.HIGH) # Set BIN2
@@ -126,13 +150,13 @@ def robot_move():
 			  GPIO.output(37, GPIO.HIGH) # Set PWMB
 			  # Disable STBY (standby)
 			  GPIO.output(13, GPIO.HIGH)
-			  time.sleep(0.3)
+			  time.sleep(0.1)
 		else:
 			  # Drive the motor clockwise
 			  print("Go straight")
 			  # Motor A:
 			  GPIO.output(12, GPIO.HIGH) # Set AIN1
-			  GPIO.output(11, GPIO.LOW) # Set AIN2
+			  GPIO.output(29, GPIO.LOW) # Set AIN2
 			  # Motor B:
 			  GPIO.output(15, GPIO.HIGH) # Set BIN1
 			  GPIO.output(16, GPIO.LOW) # Set BIN2
@@ -143,34 +167,53 @@ def robot_move():
 			  GPIO.output(37, GPIO.HIGH) # Set PWMB
 			  # Disable STBY (standby)
 			  GPIO.output(13, GPIO.HIGH)
-			  time.sleep(0.3)
+			  time.sleep(0.2)
 		i += 1
 		print(i)
 	
 	# Reset all the GPIO pins by setting them to LOW
 	GPIO.output(12, GPIO.LOW) # Set AIN1
-	GPIO.output(11, GPIO.LOW) # Set AIN2
+	GPIO.output(29, GPIO.LOW) # Set AIN2
 	GPIO.output(7, GPIO.LOW) # Set PWMA
 	GPIO.output(13, GPIO.LOW) # Set STBY
 	GPIO.output(15, GPIO.LOW) # Set BIN1
 	GPIO.output(16, GPIO.LOW) # Set BIN2
 	GPIO.output(37, GPIO.LOW) # Set PWMB
 	
-doBreak = 0
+
 try:	
+	doBreak = 0
 	while True:
-		inData = convertHex(getBinary()) #Runs subs to get incoming hex value
-		for button in range(len(Buttons)):#Runs through every value in list
-			if hex(Buttons[button]) == inData: #Checks this against incoming
-				print(ButtonsNames[button]) #Prints corresponding english name for button
+		inData = convertHex(getBinary()) # Runs subs to get incoming hex value
+		for button in range(len(Buttons)):# Runs through every value in list
+			if hex(Buttons[button]) == inData: # Checks this against incoming
+				print(ButtonsNames[button]) # Prints corresponding english name for button
 				if (ButtonsNames[button] == "ONE"):
 					print("button found")
-					robot_move()
-				if (ButtonsNames[button] == "EIGHT"):
+					roomNumber = 1
+					robot_move(roomNumber)
+					if (doBreak == 1):
+						break
+				if (ButtonsNames[button] == "TWO"):
+					print("button found")
+					roomNumber = 2
+					robot_move(roomNumber)
+					if (doBreak == 1):
+						break
+				if (ButtonsNames[button] == "EIGHT"): # Button eight to stop
 					doBreak = 1
+					# Reset all the GPIO pins by setting them to LOW
+					GPIO.output(12, GPIO.LOW) # Set AIN1
+					GPIO.output(29, GPIO.LOW) # Set AIN2
+					GPIO.output(7, GPIO.LOW) # Set PWMA
+					GPIO.output(13, GPIO.LOW) # Set STBY
+					GPIO.output(15, GPIO.LOW) # Set BIN1
+					GPIO.output(16, GPIO.LOW) # Set BIN2
+					GPIO.output(37, GPIO.LOW) # Set PWMB
 					break
 		if (doBreak == 1):
 			break
 	GPIO.cleanup()
 except:
+	print("ERROR")
 	GPIO.cleanup()
