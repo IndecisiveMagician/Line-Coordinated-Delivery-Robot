@@ -46,7 +46,7 @@ Start the webserver:
 
 `python3 https_webserver.py`
 
-You will see "Server Starts -" followed by the address to type in your browser. Put this in your browser search bar and now you can freely control the robot by picking the room number on the GUI buttons to send it to.
+You will see "Server Starts -" followed by the address to type in your browser. Put this in your browser search bar and now you can freely control the robot by picking the room number on the GUI buttons to send it to. You can also put the IP directly into the search bar and log in using the credentials saved in users.json.
 
 ## Control using Remote
 
