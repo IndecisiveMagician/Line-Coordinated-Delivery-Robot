@@ -38,17 +38,15 @@ Once in your Raspberry Pi OS enviroment, Install the required dependencies from 
 Connect the infrared sensors and motor driver module to the Raspberry Pi's GPIO pins as per the wiring diagram provided in the credits of this repository. Now you can pick whether to control the robot using a webserver or controller. 
 
 ## Start Webserver
-To start website first power on the pi and navigate to the folder that contains the webserver python file in the terminal.
+To start website first power on the pi and cd to the folder that contains the webserver python file 'https_webserver.py'. Change line 8 of http_webserver.py `host='youriphere` to your ip you are hosting on. The IP can be found with the following command:
+
+`ip -4 address|grep inet`
 
 Start the webserver: 
 
 `python3 https_webserver.py`
 
-Open a web browser on your computer and navigate to the webserver's IP address. This can be found with the following command:
-
-`hostname -I`
-
-Now you can freely control the robot by picking the room number on the GUI buttons to send it to.
+You will see "Server Starts -" followed by the address to type in your browser. Put this in your browser search bar and now you can freely control the robot by picking the room number on the GUI buttons to send it to.
 
 ## Control using Remote
 
