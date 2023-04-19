@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <style>
+    /* Style the login form */
+    form {
+      border: 3px solid #f1f1f1;
+    }
+    container { 
+        background-color: lightgray;
+        padding: 25px;    
+    } 
+
+    /* Style the input fields */
+    input[type=text], input[type=password] {
+     border: 2px solid black;    
+        display: inline-block;
+	padding: 12px 20px;
+	margin: 8px 0;
+        width: 75%;       }
+
+    /* Style the login button */
+    button {
+      color: black;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Change the button on hover */
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* Center the login form */
+    .container {
+      text-align: center;
+        background-color: #80bdff;
+       border: 1px solid blue; /* Blue border */
+       cursor: pointer;
+       font-size: 15px;
+      margin: auto;
+      width: 50%;
+    }
+  </style>
+</head>
+<body>
+	<center> <h2>Login Page</h2></center>
+  <div class="container">
+    <form>
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" id="username" required>
+
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password" required>
+
+      <button type="submit" onclick="login()">Login</button>
+    </form>
+  </div>
+
+  <script>
+   window.onload = function() {
+  // Check if there is a valid cookie
+  var cookie = document.cookie.split(";").filter(function(item) {
+    return item.trim().startsWith("username=");
+  });
+  if (cookie.length) {
+    var username = cookie[0].split("=")[1];
+    // Redirect the user to the homepage or dashboard
+    alert("Welcome back, " + username + "!");
+  }
+}
+
+
+function login() {
+  // Get the username and password entered by the user
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+
+  // Retrieve the list of users from the users.json file
+  fetch("users.json")
+    .then(response => response.json())
+    .then(data => {
+      var users = data.users;
+
+      // Check if the username and password are correct
+      for (var i = 0; i < users.length; i++) {
+        if (username === users[i].username && password === users[i].password) {
+          alert("Login successful!");
+          window.location.href = "http://10.16.60.44/";
+          return;
+        }
+      }
+      alert("Invalid username or password. Please try again.");
+    })
+    .catch(error => console.error(error));
+}  </script>
+</body>
+</html>
