@@ -44,7 +44,11 @@ Start the webserver:
 
 `python3 https_webserver.py`
 
-Open a web browser on your computer and navigate to the webserver's IP address. Now you can freely control the robot by picking the room number on the GUI buttons to send it to.
+Open a web browser on your computer and navigate to the webserver's IP address. This can be found with the following command:
+
+`hostname -I`
+
+Now you can freely control the robot by picking the room number on the GUI buttons to send it to.
 
 ## Control using Remote
 
