@@ -44,19 +44,38 @@ class MyServer(BaseHTTPRequestHandler):
 
 	def do_GET(self):
 		html = '''
-		<html>
-		<body 
-		style="width:960px; margin: 20px auto;">
-		<h1>Welcome to my Raspberry Pi</h1>
-		<p>Current GPU temperature is {}</p>
-		<form action="/" method="POST">
-		Pick a room :
-		<input type="submit" name="submit" value="1">
-		<input type="submit" name="submit" value="2">
-		<input type="submit" name="submit" value="stop">
-		</form>
-		</body>
-		</html>
+<html>
+<head>
+
+</head>
+<body style="background-color:#d3d3d3">
+<h2 style="background: linear-gradient(to right, #80bdff 50%, #d3d3d3 100%);box-shadow: 0 4px 2px -2px gray;">
+__Line Following Robot
+         <div class="top-btn-group" style="text-align:right; margin: 5px 5px 5px 1px;">
+            <button type="button" style="background-color: #80bdff; border: 1px solid blue; cursor: pointer;">Contact Us</button>
+            <button class="circlebtn" type="button" style="border-radius: 50%; background-color: #80bdff; border: 1px solid blue; cursor: pointer;">?
+            </button>
+            <button onclick="location.href='10.16.60.44'" style="background-color: #80bdff; border: 1px solid blue; cursor: pointer;">Logout</button>
+         </div>
+      </h2>
+<div style="width:300px;height:200px;overflow-y:scroll;padding:20px;background-color:#c1c1c1">
+  <form action="/" method="POST">
+    Pick a room :
+    <input type="submit" name="submit" value="1"  style="height:35px; width:100%; margin-bottom: 5px; font-size:25px; cursor:pointer; border:1px solid blue; background-color:#80bdff;">
+    <input type="submit" name="submit" value="2" style="height:35px; width:100%; margin-bottom: 5px; font-size:25px; cursor:pointer; border:1px solid blue; background-color:#80bdff;">
+    <input type="submit" name="submit" value="3" style="height:35px; width:100%; margin-bottom: 5px; font-size:25px; cursor:pointer; border:1px solid blue; background-color:#80bdff;">
+    <input type="submit" name="submit" value="4" style="height:35px; width:100%; margin-bottom: 5px; font-size:25px; cursor:pointer; border:1px solid blue; background-color:#80bdff;">
+    <input type="submit" name="submit" value="5" style="height:35px; width:100%; margin-bottom: 5px; font-size:25px; cursor:pointer; border:1px solid blue; background-color:#80bdff;">
+    <input type="submit" name="submit" value="6" style="height:35px; width:100%; margin-bottom: 5px; font-size:25px; cursor:pointer; border:1px solid blue; background-color:#80bdff;">
+    <input type="submit" name="submit" value="7" style="height:35px; width:100%; margin-bottom: 5px; font-size:25px; cursor:pointer; border:1px solid blue; background-color:#80bdff;">
+  </form>
+</div>
+    <div class="bottom-btn-group" style="padding:20px;margin-right:20px; ">
+          <input class="bottom-btn" type="submit" name="submit" value="Stop Run" style=" cursor: pointer; background-color: #80bdff; width:170px;height:50px; font-size: 20px; border: 1px solid blue;">
+         <button class="bottom-btn"style=" cursor: pointer; width:170px;height:50px;font-size: 20px; background-color: #80bdff; border: 1px solid blue;">Home</button>
+    </div>
+  </body>
+  </html>
 		'''
 		temp = getTemperature()
 		self.do_HEAD()
