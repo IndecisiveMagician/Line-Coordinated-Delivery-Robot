@@ -56,7 +56,7 @@ Run the remote movement code:
 
 `python3 movementWithRemote.py`
 
-Now you can freely control the robot by pressing the remote buttons that corredespond to the room you want it to stop at. 
+Now you can freely control the robot by pressing the remote buttons that correspond to the room you want it to stop at. 
 
 ## Authors
 
@@ -78,7 +78,7 @@ Special thanks to the following resources:
 
 [Line following IR Sensor Tutorial](https://thepihut.com/blogs/raspberry-pi-tutorials/how-to-use-the-tcrt5000-ir-line-follower-sensor-with-the-raspberry-pi)
 
-[IR remote reciever decoder](https://github.com/Lime-Parallelogram/pyIR)
+[IR remote receiver decoder](https://github.com/Lime-Parallelogram/pyIR)
 
 [Motor Driver GPIO Pinout](https://learn.adafruit.com/adafruit-tb6612-h-bridge-dc-stepper-motor-driver-breakout)
 
