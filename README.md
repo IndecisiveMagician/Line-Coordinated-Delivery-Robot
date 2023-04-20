@@ -82,7 +82,7 @@ Special thanks to the following resources:
 
 [Motor Driver GPIO Pinout](https://learn.adafruit.com/adafruit-tb6612-h-bridge-dc-stepper-motor-driver-breakout)
 
-[Motors GPIO Pinout](https://www.adafruit.com/product/3777)
+[Motor Driver Guide](https://howchoo.com/g/mjg5ytzmnjh/controlling-dc-motors-using-your-raspberry-pi)
 
 [Webserver interface](https://www.aranacorp.com/en/create-a-web-interface-to-control-your-raspberry-pi/)
 
